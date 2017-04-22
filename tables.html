@@ -58,27 +58,21 @@
 	    </footer>
 
 	</div>
-
-</body>
-
-
-<!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS LOADED FROM OUR SERVER -->
-<script type="text/javascript">
+	<script type="text/javascript">
 
 	function clearTable(){
 
-		$.ajax("/api/clear", method: "POST"})
+		var currentURL = window.location.origin;
+		$.ajax({url: localhost + "/api/clear", method: "POST"})
 
 	}
 
 	$("#clear").on('click', function(){
-		alert("Clearing information...");
 		clearTable();
-
-		// Refresh the page after data is cleared
 		location.reload();
 	})
 
 
-</script>
+	</script>
+</body>
 </html>
