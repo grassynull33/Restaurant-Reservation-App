@@ -14,3 +14,48 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json"}));
 
+var reservation = [{
+name: "",
+phone: "",
+uniqueID: "",
+email: ""}];
+
+//phone, uniqueID, email, name
+
+app.get("/", function(req, res) {
+	res.sendFile(path.join(__dirname, "reserve.html"));
+});
+
+app.get("/api/:characters?", function(req, res) {
+	var chosenReservation = req.params.characters;
+	if (reservation) {
+		console.log(reservation);
+
+		for (var i = 0; i < reservation.length; i++) {
+			if (chosenReservation===reservation[i].name) {
+				return res.json(reservation[i]);
+			}
+		}
+	}
+	return res.json(characters);
+});
+
+// Create New Characters - takes in JSON input
+app.post("/api/new", function(req, res) {
+  var newreservation = req.body;
+  newreservation.name = newreservation.name.replace(/\s+/g, "").toLowerCase();
+
+  console.log(newreservation);
+
+  reservation.push(newreservation);
+
+  res.json(newreservation);
+});
+
+// Starts the server to begin listening
+// =============================================================
+app.listen(PORT, function() {
+  console.log("App listening on PORT " + PORT);
+});
+
+
