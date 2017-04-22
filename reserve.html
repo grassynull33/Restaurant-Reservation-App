@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<title>Reservation Page</title>
 
-	<!-- Latest compiled and minified CSS & JS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -67,7 +66,6 @@
 			</div>
 		</div>
 
-
 	    <footer class="footer">
 	      <div class="container">
 	        <p><a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a> </p>
@@ -90,13 +88,29 @@
 			email: $("#reserve_email").val().trim(),
 			id: $("#reserve_uniqueID").val().trim(),
 		};
+
 		console.log(newReservation);
 
-		$.post("api/new", newReservation)
-		.done(function(data) {
-			console.log(data);
-			alert("Your reservation have been added");
-		});
+	    $.post("/api/tables", newReservation,
+	    .done(function(data) {
+
+	    	if(data == true){
+	    		alert("Congrats! your reservation have been booked.")
+	    	}
+
+	    	if(data == false){
+	    		alert("Sorry, you are on the waiting list at this time.")
+	    	}
+
+    		$('#reserve_name').val("");
+			$('#reserve_phone').val("");
+			$('#reserve_email').val("");
+			$('#reserve_uniqueID').val("");
+
+	    });
+
+		return false;
+
 	});
 
 </script>
