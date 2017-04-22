@@ -15,27 +15,7 @@ var PORT = 3000;
 // app.use(bodyParser.text());
 // app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-// Star Wars Characters (DATA)
-// =============================================================
-// var characters = [{
-//   routeName: "yoda",
-//   name: "Yoda",
-//   role: "Jedi Master",
-//   age: 900,
-//   forcePoints: 2000
-// }, {
-//   routeName: "darthmaul",
-//   name: "Darth Maul",
-//   role: "Sith Lord",
-//   age: 200,
-//   forcePoints: 1200
-// }, {
-//   routeName: "obiwankenobi",
-//   name: "Obi Wan Kenobi",
-//   role: "Jedi Master",
-//   age: 55,
-//   forcePoints: 1350
-// }];
+var reservations = [];
 
 // Routes
 // =============================================================
@@ -53,8 +33,13 @@ app.get("/reserve", function(req, res) {
   res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
-app.get("/api/tables", function(req, res) {
-  return res.json({ tables: true });
+app.post("/api/tables", function(req, res) {
+  var newReservation = req.body;
+  console.log(newReservation);
+
+  reservations.push(newReservation);
+
+  return res.json(reservations);
 });
 
 app.get("/api/waitlist", function(req, res) {
@@ -64,18 +49,6 @@ app.get("/api/waitlist", function(req, res) {
 // Delete reservation
 // app.get("/tables#", function(req, res) {
 //   return res.json({ waitlist: true });
-// });
-
-// Create New Characters - takes in JSON input
-// app.post("/api/new", function(req, res) {
-//   var newcharacter = req.body;
-//   newcharacter.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
-
-//   console.log(newcharacter);
-
-//   characters.push(newcharacter);
-
-//   res.json(newcharacter);
 // });
 
 // Starts the server to begin listening
