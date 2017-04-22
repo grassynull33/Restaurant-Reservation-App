@@ -73,44 +73,41 @@
 	    </footer>
 
 	</div>
+	<script type="text/javascript">
 
+		$(".submit").on("click", function(event) {
+			event.preventDefault();
+			var newReservation = {
+				name: $("#reserve_name").val().trim(),
+				phoneNumber: $("#reserve_phone").val().trim(),
+				email: $("#reserve_email").val().trim(),
+				id: $("#reserve_uniqueID").val().trim(),
+			};
+
+			console.log(newReservation);
+
+		    $.post("/api/tables", newReservation,
+		    .done(function(data) {
+
+		    	if(data == true){
+		    		alert("Congrats! your reservation have been booked.")
+		    	}
+
+		    	if(data == false){
+		    		alert("Sorry, you are on the waiting list at this time.")
+		    	}
+
+	    		$('#reserve_name').val("");
+				$('#reserve_phone').val("");
+				$('#reserve_email').val("");
+				$('#reserve_uniqueID').val("");
+
+		    });
+
+			return false;
+
+		});
+
+	</script>
 </body>
 </html>
-
-<!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
-<script type="text/javascript">
-
-	$(".submit").on("click", function(event) {
-		event.preventDefault();
-		var newReservation = {
-			name: $("#reserve_name").val().trim(),
-			phoneNumber: $("#reserve_phone").val().trim(),
-			email: $("#reserve_email").val().trim(),
-			id: $("#reserve_uniqueID").val().trim(),
-		};
-
-		console.log(newReservation);
-
-	    $.post("/api/tables", newReservation,
-	    .done(function(data) {
-
-	    	if(data == true){
-	    		alert("Congrats! your reservation have been booked.")
-	    	}
-
-	    	if(data == false){
-	    		alert("Sorry, you are on the waiting list at this time.")
-	    	}
-
-    		$('#reserve_name').val("");
-			$('#reserve_phone').val("");
-			$('#reserve_email').val("");
-			$('#reserve_uniqueID').val("");
-
-	    });
-
-		return false;
-
-	});
-
-</script>
