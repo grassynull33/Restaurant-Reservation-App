@@ -16,9 +16,9 @@ app.use(bodyParser.json({ type: "application/vnd.api+json"}));
 
 var reservation = [{
 name: "",
-phone: "",
-uniqueID: "",
-email: ""}];
+phoneNumber: "",
+email: "",
+id: ""}];
 
 //phone, uniqueID, email, name
 
@@ -42,14 +42,14 @@ app.get("/api/:characters?", function(req, res) {
 
 // Create New Characters - takes in JSON input
 app.post("/api/new", function(req, res) {
-  var newreservation = req.body;
-  newreservation.name = newreservation.name.replace(/\s+/g, "").toLowerCase();
+  var newReservation = req.body;
+  newReservation.name = newReservation.name.replace(/\s+/g, "").toLowerCase();
 
-  console.log(newreservation);
+  console.log(newReservation);
 
-  reservation.push(newreservation);
+  reservation.push(newReservation);
 
-  res.json(newreservation);
+  res.json(newReservation);
 });
 
 // Starts the server to begin listening
