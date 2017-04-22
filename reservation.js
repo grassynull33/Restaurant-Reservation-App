@@ -53,24 +53,20 @@ app.get("/reserve", function(req, res) {
   res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
-// // Search for Specific Character (or all characters) - provides JSON
-// app.get("/api/:characters?", function(req, res) {
-//   var chosen = req.params.characters;
+app.get("/api/tables", function(req, res) {
+  return res.json({ tables: true });
+});
 
-//   if (chosen) {
-//     console.log(chosen);
+app.get("/api/waitlist", function(req, res) {
+  return res.json({ waitlist: true });
+});
 
-//     for (var i = 0; i < characters.length; i++) {
-//       if (chosen === characters[i].routeName) {
-//        return res.json(characters[i]);
-//       }
-//     }
-//     return res.json(false);
-//   }
-//   return res.json(characters);
+// Delete reservation
+// app.get("/tables#", function(req, res) {
+//   return res.json({ waitlist: true });
 // });
 
-// // Create New Characters - takes in JSON input
+// Create New Characters - takes in JSON input
 // app.post("/api/new", function(req, res) {
 //   var newcharacter = req.body;
 //   newcharacter.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
