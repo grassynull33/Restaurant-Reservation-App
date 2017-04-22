@@ -75,7 +75,7 @@
 	</div>
 
 	<script type="text/javascript">
-
+var count1 = 0;
 		$(".submit").on("click", function(event) {
 			event.preventDefault();
 			var newReservation = {
@@ -89,13 +89,16 @@
 
 		    $.post("/api/tables", newReservation,
 		    function(data) {
-
-		    	if(data == true){
+		    	
+		    	if(count1 < 5){
 		    		alert("Congrats! your reservation have been booked.")
+		    		$("#tablesection").text(newReservation.id)
+		    		count1++
 		    	}
 
-		    	if(data == false){
+		    	if(count1 > 5){
 		    		alert("Sorry, you are on the waiting list at this time.")
+		    		count1++
 		    	}
 
 	    		$('#reserve_name').val("");
