@@ -62,7 +62,7 @@
 
 		function clearTable(){
 
-			$.ajax("/api/clear", method: "POST"})
+			$.ajax({"/api/clear", method: "POST"});
 		}
 
 		$("#clear").on('click', function(){
@@ -70,7 +70,7 @@
 			clearTable();
 			
 			location.reload();
-		})
+		});
 
 	</script>
 </body>
