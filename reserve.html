@@ -87,7 +87,7 @@
 			console.log(newReservation);
 
 		    $.post("/api/tables", newReservation,
-		    .done(function(data) {
+		    function(data) {
 
 		    	if(data == true){
 		    		alert("Congrats! your reservation have been booked.")
